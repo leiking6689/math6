@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>有理数专题互动课 · 沪上数学</title>
+<style>
+  :root{
+    --bg:#F7F8FF; --ink:#23294E; --ink-soft:#5B6088; --line:#E4E7FF;
+    --blue:#5B6CFF; --blue-deep:#3D4FD8; --blue-bg:#EEF0FF;
+    --green:#55C59D; --green-deep:#2FA878; --green-bg:#E9F8F1;
+    --yellow:#FFD166; --pink:#FF7AB6; --white:#FFFFFF;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",sans-serif;
+    background:var(--bg); color:var(--ink); line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:920px;margin:0 auto;padding:32px 20px 56px;}
+
+  /* ── 顶部 ── */
+  header{text-align:center;padding:28px 0 8px;}
+  .badge{
+    display:inline-block;background:var(--blue-bg);color:var(--blue-deep);
+    font-size:14px;font-weight:700;padding:5px 16px;border-radius:999px;
+    border:1.5px solid #D6DBFF;letter-spacing:1px;
+  }
+  h1{
+    font-size:clamp(28px,5vw,40px);font-weight:900;margin:18px 0 10px;
+    letter-spacing:1px;
+  }
+  h1 .hl{color:var(--blue);}
+  .sub{color:var(--ink-soft);font-size:16px;}
+  .sub b{color:var(--ink);}
+
+  /* ── 卡片 ── */
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:22px;margin:40px 0 10px;}
+  .card{
+    position:relative;display:block;text-decoration:none;color:inherit;
+    background:var(--white);border-radius:20px;padding:26px 24px 22px;
+    border:2px solid var(--line);
+    box-shadow:0 6px 20px rgba(70,80,180,.07);
+    transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    overflow:hidden;
+  }
+  .card:hover{transform:translateY(-5px);box-shadow:0 14px 32px rgba(70,80,180,.16);}
+  .card:active{transform:translateY(-1px);}
+  .card.t1:hover{border-color:var(--blue);}
+  .card.t2:hover{border-color:var(--green);}
+  .card::before{
+    content:"";position:absolute;top:0;left:0;right:0;height:6px;
+  }
+  .card.t1::before{background:linear-gradient(90deg,var(--blue),#8B97FF);}
+  .card.t2::before{background:linear-gradient(90deg,var(--green),#8FDFC0);}
+
+  .tag{
+    display:inline-block;font-size:13px;font-weight:800;padding:3px 12px;
+    border-radius:999px;margin-bottom:12px;
+  }
+  .t1 .tag{background:var(--blue-bg);color:var(--blue-deep);}
+  .t2 .tag{background:var(--green-bg);color:var(--green-deep);}
+  .card h2{font-size:23px;font-weight:900;margin-bottom:6px;}
+  .card .one{color:var(--ink-soft);font-size:14.5px;margin-bottom:14px;}
+  .feat{list-style:none;margin-bottom:18px;}
+  .feat li{
+    font-size:15px;padding:5px 0 5px 26px;position:relative;color:var(--ink);
+  }
+  .feat li::before{
+    content:"✓";position:absolute;left:0;top:5px;
+    width:18px;height:18px;border-radius:50%;
+    font-size:12px;font-weight:900;text-align:center;line-height:18px;color:#fff;
+  }
+  .t1 .feat li::before{background:var(--blue);}
+  .t2 .feat li::before{background:var(--green);}
+  .go{
+    display:inline-flex;align-items:center;gap:6px;
+    font-size:15px;font-weight:800;
+  }
+  .t1 .go{color:var(--blue-deep);}
+  .t2 .go{color:var(--green-deep);}
+  .go .arrow{transition:transform .18s ease;}
+  .card:hover .arrow{transform:translateX(5px);}
+
+  /* ── 底部提示 ── */
+  .tips{
+    margin-top:34px;background:var(--white);border:1.5px dashed #CBD0F5;
+    border-radius:16px;padding:18px 22px;font-size:14.5px;color:var(--ink-soft);
+  }
+  .tips b{color:var(--ink);}
+  .tips .row{padding:3px 0;}
+  .tips .dot{color:var(--yellow);font-weight:900;margin-right:6px;}
+  footer{text-align:center;margin-top:30px;color:#9AA0C8;font-size:13px;}
+  .anchor{position:absolute;}
+  a:focus-visible,button:focus-visible{outline:3px solid var(--yellow);outline-offset:3px;border-radius:8px;}
+
+  @media (prefers-reduced-motion: reduce){
+    *{transition:none !important;animation:none !important;scroll-behavior:auto !important;}
+  }
+  @media print{
+    body{background:#fff;}
+    .card{box-shadow:none;break-inside:avoid;}
+    .tips{border-color:#ccc;}
+  }
+
+  @media (max-width:560px){
+    .wrap{padding:24px 14px 44px;}
+    .card{padding:22px 18px 18px;}
+  }
+</style>
+</head>
+<body>
+<main class="wrap">
+
+  <header>
+    <span class="badge">沪教版 · 六升七 / 七年级 · 数学互动微课</span>
+    <h1>有理数<span class="hl">专题互动课</span></h1>
+    <p class="sub">拖动数轴、动手实验、闯关练习 —— <b>点开卡片，开始上课</b></p>
+  </header>
+
+  <div class="cards">
+
+    <a class="card t1" href="#goto-t1" data-goto="jueduizhi-huajian.html">
+      <span class="tag">专题 1</span>
+      <h2>绝对值化简与分类讨论</h2>
+      <p class="one">为什么要分类？怎么写才规范？带取值范围的题怎么做？</p>
+      <ul class="feat">
+        <li>分类讨论思想：一句话讲清「为什么讨论」</li>
+        <li>零点分段五步法 + 楷体作业本规范书写</li>
+        <li>逐段讨论最小值：平底图像一看就懂</li>
+        <li>4 关闯关练习 + 错题医院</li>
+      </ul>
+      <span class="go">进入专题 1 <span class="arrow">→</span></span>
+    </a>
+
+    <a class="card t2" href="#goto-t2" data-goto="shu-de-bijiao.html">
+      <span class="tag">专题 2</span>
+      <h2>数的大小比较</h2>
+      <p class="one">特殊值、测试点、作差、作商 —— 四把钥匙全练到</p>
+      <ul class="feat">
+        <li>特殊值法：台阶动画看数怎么排</li>
+        <li>测试点法：双点拖动实时比大小</li>
+        <li>作差法 &amp; 作商法：函数曲线验证结论</li>
+        <li>4 关闯关练习 + 错题医院</li>
+      </ul>
+      <span class="go">进入专题 2 <span class="arrow">→</span></span>
+    </a>
+
+  </div>
+
+  <div class="tips">
+    <div class="row"><span class="dot">★</span><b>上课建议：</b>电脑或手机浏览器均可打开，两个专题页面顶部有导引条可互相切换。</div>
+    <div class="row"><span class="dot">★</span><b>学习顺序：</b>建议先学专题 1（绝对值化简），再学专题 2（大小比较）；也可按教学进度独立使用。</div>
+    <div class="row"><span class="dot">★</span><b>互动方式：</b>页面里的数轴上的圆点都可以<b>用鼠标或手指拖动</b>，边拖边观察数值与图像变化。</div>
+  </div>
+
+  <footer>上海金山杭州湾双语学校 · 数学互动学习资源</footer>
+
+  <span id="goto-t1" class="anchor" aria-hidden="true"></span>
+  <span id="goto-t2" class="anchor" aria-hidden="true"></span>
+</main>
+
+<script>
+document.addEventListener('click', function(event){
+  var link = event.target.closest('a[href^="#"]');
+  if (!link) return;
+  event.preventDefault();
+  if (link.dataset.goto) {
+    window.location.href = link.dataset.goto;
+    return;
+  }
+  var target = document.getElementById(link.getAttribute('href').slice(1));
+  if (target) { target.scrollIntoView({ block: 'start' }); }
+});
+</script>
+</body>
+</html>
